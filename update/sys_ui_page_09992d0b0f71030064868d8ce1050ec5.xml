@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description/>
+        <direct>true</direct>
+        <endpoint>x_58872_needit_FormattingTesting.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+<style>
+.page{
+	background-color: rgb(0,0,0);
+	}
+	
+.container{
+		
+		width: 90%;
+		height: 90%;
+		position: relative;
+	    margin: auto;
+	background-color: rgb(0,0,0);
+		
+		}
+		
+.container-top-left{
+		position: absolute;
+		left: 0px;
+		width: 50%;
+		height: auto;
+	   background-color: rgb(255,0,255);
+		}
+.container-top-right{
+		position: absolute;
+		right: 0px;
+		width: 50%;
+		height: 25%;
+	background-color: rgb(0,255,255);
+		}
+		
+		.container-bottom-left{
+		position: relative;
+		background-color: rgb(150,150,150);
+	height: auto;
+		
+		
+		}
+		
+		.container-bottom-right{
+		position: relative;
+		background-color: rgb(200,200,200);
+		height: 100%;
+		
+		
+		}
+	
+	</style>
+	<body>
+		<div class="page">
+			<div class="container">
+				<div class="container-top-left">
+				Text to appear in the upper left.<br/><br/>	
+					more text in the upper left.
+					<br/><br/>	
+					more text in the upper left.
+					<br/><br/>	
+					more text in the upper left.
+					<br/><br/>	
+					more text in the upper left.
+					<br/><br/>	
+					more text in the upper left.
+					<br/><br/>	
+					more text in the upper left.
+				<div class="container-bottom-left">
+					Bottom left text.		
+				</div>	
+					
+					
+				</div>
+				<div class="container-top-right">
+				Text to appear in the upper right.	<br/><br/>
+					more text in the upper right.
+						<div class="container-bottom-right">
+							bottom right text.
+				</div>	
+					
+				</div>
+				
+				
+					
+				
+				
+			</div>
+		</div>	
+	</body>
+	
+	
+	
+</j:jelly>]]></html>
+        <name>FormattingTesting</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-10-18 17:33:18</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>09992d0b0f71030064868d8ce1050ec5</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_name>FormattingTesting</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_ui_page_09992d0b0f71030064868d8ce1050ec5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-10-18 17:51:26</sys_updated_on>
+    </sys_ui_page>
+</record_update>

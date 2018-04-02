@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[document.getElementById("main-container").addEventListener("mouseover", mouseOver);
+document.getElementsByClassName("top-container-right").addEventListener("mouseover", mouseOver2);
+
+function alerting(){
+	alert('alerting');
+
+}
+
+function mouseOver() {
+    document.getElementById("main-container").style.color = "#4CAF50";
+}
+function mouseOver2() {
+    document.getElementsByClassName("top-container-right").style.color = "red";
+}
+
+
+function searchNumber2() {
+
+		var radio1 = document.getElementById("searchChoice1").checked;
+		var radio2 = document.getElementById("searchChoice2").checked;	
+	
+	alert(radio1);
+	alert(radio2);
+
+	if (radio1 == false && radio2 == false) {
+		
+		alert('Please choose a search criteria before searching.');
+	}
+	else
+
+		{	
+			var radio = '';
+			
+			if (radio1 == false){
+				radio = 'priority';
+			}else{
+				radio = 'number';
+			}
+			
+			
+			alert(radio);
+			
+			if (radio == "number"){
+			console.log('Number');
+			searchNumber();
+		}
+		 
+		 if (radio == "priority"){
+			 console.log('Priority');
+			 searchPriority();
+		 }
+	
+}
+	
+}
+
+function searchPriority(){
+	var p = document.getElementById("searchNumber").value;
+	alert(p);
+
+var ga = new GlideAjax('AjaxIncludes');
+ga.addParam('sysparm_name','ajaxArray');
+ga.addParam('sysparm_p',p);	
+ga.getXML(myCallBack); 
+	
+	function myCallBack(response) {
+		var ajresp = response.responseXML.documentElement.getAttribute('answer');
+		
+		
+		var jsonResp = ajresp.evalJSON(); //transform JSON string to object
+				
+		
+		
+		for (var i=0; i < jsonResp.length; i++) {
+			 
+			var str = i + " - " + jsonResp[i].Number+" - "+jsonResp[i].Description+" - "+jsonResp[i].SysID;
+			//alert(jsonResp[i].Number+" - "+jsonResp[i].Description+" - "+jsonResp[i].SysId);
+			alert(str);
+		}
+	
+	}
+	
+}
+
+function showText(){
+	document.getElementById("hidden_parts").style.display = "block";
+	console.log('Show');
+	
+	
+}
+
+function hideText(){
+	document.getElementById("hidden_parts").style.display = "none";
+	console.log('Hide');
+	
+}
+
+function searchNumber(){
+	
+	var n = document.getElementById("searchNumber").value;
+
+			
+	
+var ga = new GlideAjax('AjaxIncludes');
+ga.addParam('sysparm_name','ajaxRecord4');
+ga.addParam('sysparm_n',n);	
+ga.getXML(myCallBack); 
+	
+
+	
+	function myCallBack(response) {
+		var ajresp = response.responseXML.documentElement.getAttribute('answer');
+	
+			
+		
+	
+	}
+	
+	
+	
+}
+
+function ajaxFunct(x){
+
+var ga = new GlideAjax('AjaxIncludes');
+ga.addParam('sysparm_name','ajaxRecord3');
+ga.addParam('sysparm_x',x);	
+ga.getXML(myCallBack); 
+	
+
+	
+	function myCallBack(response) {
+		var ajresp = response.responseXML.documentElement.getAttribute('answer');
+	
+		
+		document.getElementById('text_here').innerHTML += '<br><br>'+ ajresp;
+		//alert("Here is the response: " + ajresp);
+	
+	
+		
+	}
+}//end ajaxFunct 
+
+
+function addList() {
+	
+	var list_content = document.getElementById("li-list").innerHTML;
+	console.log('This is the current list: '+list_content+'.');
+	var header = '<h3>To Do List</h3>';
+	
+	   
+		
+		var list_item = document.getElementById("li-entry").value;
+		
+
+		
+		var ul=document.createElement('ul');
+		ul.setAttribute('id','list-to-add');
+	var i = 0;
+	if (list_content == '')
+			{
+			document.getElementById("li-list").innerHTML = header;
+			document.getElementById("li-list").appendChild(ul);
+			i++;	
+			}
+	else
+			{
+			document.getElementById("li-list").appendChild(ul);
+			i++;	
+			}
+	
+		var li=document.createElement('li');
+		ul.appendChild(li);
+		li.innerHTML=li.innerHTML + list_item;
+	
+		document.getElementById("li-entry").value = '';
+	
+		
+				
+
+	
+	
+}
+
+function getCallContact(reference) {
+
+  alert('You clicked me!!');
+		 
+var pass = document.createElement('input');
+pass.type = 'password';
+document.body.appendChild(pass);
+pass.type = 'text';
+pass.value = 'Password';
+		 
+}
+
+function alert_msg() {
+		var altxt = document.getElementById("number_box").value;
+		alert('Testing script');
+
+		}
+		
+function showHide(id_choice){
+		
+	
+	
+		var systemID = String(id_choice);
+		
+		document.getElementById("text_here").innerHTML = '';
+		document.getElementById("text_here").innerHTML = '<div id="text_margin">'+document.getElementById(id_choice).innerHTML+'</div>';
+		document.getElementById("systemId").innerHTML = systemID; //store the ID to reference later
+	
+	document.getElementById("contId").style.display = "block";
+		
+		ajaxFunct(id_choice);                                     //see if the ajax works on click
+	
+		}
+		
+function showHideTest(id_choice){
+		alert(id_choice);
+		}
+
+
+
+function alertSysId() {
+	var sys_id = document.getElementById("systemId").value;
+	var short_desc = document.getElementById("short_desc").value;
+    var priority = document.getElementById("priority").value;
+	var query = new GlideRecord('x_58872_needit_needit');
+	query.addQuery('sys_id', sys_id);
+	query.query();
+	
+	 alert(sys_id);
+	
+	while (query.next()){
+	query.setValue('short_description', short_desc);
+    query.setValue('priority', priority);
+	
+ alert(sys_id);
+		alert(priority);
+		
+	}
+	
+	function saveValues() {
+    var short_desc = document.getElementById("short_desc").value;
+    var priority = document.getElementById("priority").value;
+    var test = new GlideRecord('x_58872_needit_needit');
+    test.initialize();
+    test.setValue('short_description', short_desc);
+    test.setValue('priority', priority);
+	test.setValue();
+    test.insert();
+	
+	location.reload(true);
+}
+    
+}
+
+function updateValues() {
+	var sys_id = document.getElementById("systemId").value;
+	var short_desc = document.getElementById("short_desc").value;
+    var priority = document.getElementById("priority").value;
+	var query = new GlideRecord('x_58872_needit_needit');
+	query.addQuery('sys_id', sys_id);
+	query.query();
+	
+	while (query.next()){
+	query.setValue('short_description', short_desc);
+    query.setValue('priority', priority);
+
+    query.update();}
+	
+	location.reload(true);
+	
+}
+
+function saveValues2() {
+    var short_desc = document.getElementById("short_desc").value;
+    var priority = document.getElementById("priority").value;
+    var test = new GlideRecord('x_58872_needit_needit');
+    test.initialize();
+    test.setValue('short_description', short_desc);
+    test.setValue('priority', priority);
+	test.setValue();
+    test.insert();
+	
+	location.reload(true);
+}
+    
+
+
+function updateValues2() {
+	var sys_id = document.getElementById("systemId").value;
+	var short_desc = document.getElementById("short_desc").value;
+    var priority = document.getElementById("priority").value;
+	var query = new GlideRecord('x_58872_needit_needit');
+	query.addQuery('sys_id', sys_id);
+	query.query();
+	
+	while (query.next()){
+	query.setValue('short_description', short_desc);
+    query.setValue('priority', priority);
+
+    query.update();}
+	
+	location.reload(true);
+	
+}]]></client_script>
+        <description>This is a starting point for interacting with the data in the NeedIt database.</description>
+        <direct>false</direct>
+        <endpoint>x_58872_needit_Angular JS NeedIt Requests.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<style>
+		
+		.navigation{
+		background-color: 
+		}
+
+		
+		.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+				}
+
+		#contID{
+		align: left;
+		}
+		
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+		}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+		}
+		
+		body{
+		
+		width: 1600px;
+		}
+	
+.top-container{
+		width: 100%;
+		height: 100%;
+		position: relative;
+		}
+		
+.top-container-left{
+		position: absolute;
+		left: 0px;
+		width: 50%;
+		height: auto;
+		}
+.top-container-right{
+		position: absolute;
+		right: 0px;
+		width: 50%;
+		height: 30%;
+		}
+		
+		.bottom-container-left{
+		position: relative;
+		
+		height: auto;
+		width: 50%;
+		
+		}
+		
+		.bottom-container-right{
+		position: relative;
+		
+		height: auto;
+		width: 50%;
+		
+		}
+		
+		
+		
+.container {
+border: 1px groove #efe8e8;
+border-radius: 10px;
+margin-top: 15px;
+margin-bottom: 15px;
+box-shadow: 5px 5px 5px #888888;
+text-align: left;
+		width: auto%;
+
+ background-color: #F8F8FF;	
+}
+
+		#text_margin {
+		border: groove #efe8e8;
+		border-radius: 10px;
+		margin-left: 15px;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		}
+		
+		#form-edit {
+		border-radius: 10px;
+		margin-left: 15px;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		border-style: collapsed;
+		border-color: #efe8e8;
+		border: 1px groove #efe8e8;
+		
+ background-color:#F8F8FF;
+		}
+		
+	
+	</style>
+	<title>Test Angular Page</title>
+	<!--<g:requires name="AjaxIncludes.jsdbx" />-->
+	<body>
+		
+	<textarea id="systemId" style="display:none"></textarea>
+	
+
+<div class="top-container" id="main-container">
+	<div class="top-container-left">
+			<p><h1>Return Records</h1></p>
+	
+		<g2:evaluate>
+		var gr = new GlideRecord('x_58872_needit_needit');	
+		gr.query();
+	
+	    </g2:evaluate>
+	
+	 <g:evaluate>  
+        var colors = [  
+            { name: 'red', value: '#FF0000' },  
+            { name: 'blue', value: '#0000FF' }  
+        ];  
+    </g:evaluate>  
+    <j:forEach items="${colors}" var="jvar_color">  
+        <g:evaluate jelly="true">  
+            var name = jelly.jvar_color.name;  
+            var value = jelly.jvar_color.value;  
+        </g:evaluate>  
+        <p>  
+            Color: $[SP] <span style="color:${value};">${name}</span>  
+        </p>  
+    </j:forEach> 
+	
+	
+	
+		<j:forEach items="${jvar_to_array}" var="jvar_g_ray_1">
+
+			<g:evaluate jelly="true">
+				var number = jelly.jvar_data.number;
+				var priority = jelly.jvar_data.priority;
+			</g:evaluate>
+			1 ${jvar_to_array}<br/>
+			
+			2 ${jvar_g_ray_1}
+			
+			
+		</j:forEach>
+	
+
+	
+	<table width = "50%" border-width="5px"  border-collapse="collapse" id="choosing">
+		<tr class="header">
+			
+		</tr>
+	<j2:while test="$[gr.next()]">
+		
+		
+		
+		<tr><td><input type="radio" id= "checkBox" onclick = "showHide('$[gr.getValue('sys_id')]')" name="needIt" value="$[gr.getValue('sys_id')]"></input></td>
+			<td> $[gr.getValue('number')] </td>
+			<td> $[gr.getValue('short_description')] </td>
+			<td> <a href="https://dev31501.service-now.com/task.do?sys_id=$[gr.getValue('sys_id')]">$[gr.getValue('number')]</a></td>
+		</tr>
+			<div class ="details" id="$[gr.getValue('sys_id')]" style="display:none"><p>$[gr.getValue('number')]</p><p> $[gr.getValue('short_description')]</p><p> $[gr.getValue('created')]</p></div>
+	
+		</j2:while>
+	</table>
+	<br/>
+		
+	
+	
+		
+		<div class="bottom-container-left">
+		<button onclick="showText()">Show test area</button>
+			<button onclick="hideText()" >Hide test area</button>
+			<button onclick="alerting()" >Alert msg</button>
+			
+			
+	
+		
+		
+		<g:ui_form> 
+			<h3>Ajax Search</h3>
+			<input type="text" id="searchNumber" value = ""></input>
+			<g:dialog_button onclick="searchNumber2()" type="button" class="btn">Search</g:dialog_button>
+			<h4>Choose Search Field</h4>
+			<input type="radio" id="searchChoice1" name="searchChoice" value="number">Number</input><br/>
+			<input type="radio" id="searchChoice2" name="searchChoice" value="priority">Priority</input>
+			
+			
+		</g:ui_form>
+		</div>
+		
+	</div>
+	
+	
+	<div class="top-container-right">
+			
+		
+			<div class="container" id="contId" style="display:none">
+			<div id="text_here"></div>
+			</div>
+	
+	
+		<div class="bottom-container-right">
+		<div id="hidden_parts" style="display:none">
+	
+			<div id="form-edit">
+	    <g:ui_form> 
+        <label style="display: block;">Short Description</label>
+			<input type="text" name="short_desc" id="short_desc" value = ""/><br/>
+        <label style="display: block;">Priority</label>
+            <input type="text" name="priority" id="priority" value = ""/><br/>
+		<g:dialog_button onclick="saveValues2()" type="button" class="btn">SubmitDetails</g:dialog_button>
+			<g:dialog_button onclick="updateValues2()" type="button" class="btn">UpdateDetails</g:dialog_button>
+         </g:ui_form>
+			</div>
+	<br/><br/>
+		    <br/>
+		
+		<button id="myBtn">Open Modal</button>
+		
+		<div id="myModal" class="modal">
+		
+		 <div class="modal-content">
+    <span class="close">X
+			 </span>
+	<h2>Create List</h2>
+	<input type="text" id="li-entry" placeholder="Enter list item..."></input><button type ="button" onclick="addList()">Click to Add</button>
+	<div class="list" id="li-list"></div>
+		</div>
+		</div>
+		
+			</div>
+		</div>	
+		</div>
+	</div>	
+</body>		
+	<script>
+		var modal = document.getElementById('myModal');
+
+
+var btn = document.getElementById("myBtn");
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+		</script>
+		 <script src="https://code.jquery.com/jquery-1.11.1.min.js" />
+
+        <script>
+            jQuery.noConflict();
+            var gallery;
+            (function($){
+
+                gallery = {
+                    init : function(){
+                        this.bindEvents();
+						
+                    },
+
+                    bindEvents : function(){
+                        $("body").on("click","#text_here", function(){
+                        if($("#text_here").css("opacity") == "0.5")   {
+			
+						$("#text_here").css("opacity", "1");
+                                                             }
+			else {
+						$("#text_here").css("opacity", "0.5");
+			} //end first if
+			
+			
+			       if($("#text_margin").css("background-color") == "white")   {
+			
+						$("#text_margin").css("background-color", "#f0f0f0");
+                                                             }
+			else {
+						$("#text_margin").css("background-color", "white");
+			}
+			
+                            
+                        }); //end blocks of ifs
+                    }
+			
+                }
+
+                $(document).ready(function(){
+                    gallery.init()
+                })
+
+            })(jQuery)
+        </script>
+		
+
+		
+</j:jelly>
+
+]]></html>
+        <name>Angular JS NeedIt Requests</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-09-26 15:44:23</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>5e5e7bff0f11030064868d8ce1050ea4</sys_id>
+        <sys_mod_count>391</sys_mod_count>
+        <sys_name>Angular JS NeedIt Requests</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_ui_page_5e5e7bff0f11030064868d8ce1050ea4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-10-23 20:08:43</sys_updated_on>
+    </sys_ui_page>
+</record_update>

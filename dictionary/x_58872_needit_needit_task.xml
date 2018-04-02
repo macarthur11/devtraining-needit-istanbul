@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element audit="true" extends="task" label="NeedIt Task" max_length="40" name="x_58872_needit_needit_task" sizeclass="15" type="collection">
+        <element display="true" label="Courier" max_length="32" name="u_courier" reference="x_58872_needit_needitcourier" type="reference"/>
+        <element label="Details" max_length="65536" name="u_courier_details" type="html"/>
+        <element attributes="edge_encryption_enabled=true" dependent="u_courier" dependent_on_field="u_courier" label="Courier Details" max_length="40" name="u_courier_notes" type="string" use_dependent_field="true"/>
+    </element>
+</database>

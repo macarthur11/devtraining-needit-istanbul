@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element attributes="update_synch=true" extends="dl_matcher" label="NeedItCourier" max_length="40" name="x_58872_needit_needitcourier" type="collection">
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <element attributes="edge_encryption_enabled=true" display="true" label="Courier name" max_length="40" name="u_courier_name" type="string"/>
+        <element label="Schedule" max_length="32" name="u_c_schedule" reference="cmn_schedule" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Location" max_length="40" name="u_location" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Notes" max_length="500" name="u_notes" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="New String" max_length="40" name="u_string_2" type="string"/>
+        <index name="index">
+            <element name="u_c_schedule"/>
+        </index>
+    </element>
+</database>

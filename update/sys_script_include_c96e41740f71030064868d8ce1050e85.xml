@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_58872_needit.AjaxIncludes</api_name>
+        <client_callable>true</client_callable>
+        <description>Ajax to return records from a table.</description>
+        <name>AjaxIncludes</name>
+        <script><![CDATA[var AjaxIncludes = Class.create();
+AjaxIncludes.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+	
+helloWorld: function() { return "The Server Says Hello " + this.getParameter('sysparm_user_name') + "!"; },
+	
+	ajaxArray: function(){
+	
+		var gr = new GlideRecord('x_58872_needit_needit');
+		gr.addQuery('priority',this.getParameter('sysparm_p'));
+		gr.query();
+	
+		var gra = [];
+		
+		while (gr.next()) {
+		     var object = {};
+
+               object.Number = gr.getDisplayValue('number');
+               object.Description = gr.getDisplayValue('description');
+               object.SysID = gr.getValue('sys_id');
+
+			gra.push(object);	
+		}
+			var json = new global.JSON();
+			var data = json.encode(gra); 
+
+		return data;
+
+},	
+	
+	ajaxRecord4: function(){
+		
+		var gr = new GlideRecord('x_58872_needit_needit');
+        gr.addQuery('number',this.getParameter('sysparm_n')); //passing in the number of the needit item
+		gr.query();	
+
+			while (gr.next()){
+				
+             var numberID = gr.getValue('sys_id');
+
+             if (numberID == null)
+				{
+				return 'Number does not exist.';				
+				}
+				else
+				{
+				var numberResult = gr.getDisplayValue('description');
+					return numberResult;
+					
+				}
+			
+				
+			
+			}
+	
+	},
+	
+	ajaxRecord3: function(){
+		
+		var gr = new GlideRecord('x_58872_needit_needit');
+        gr.addQuery('sys_id',this.getParameter('sysparm_x'));
+	gr.query();	
+
+			while (gr.next()){
+				
+             var courierID = gr.getValue('u_courier');
+
+              var gr2 = new GlideRecord('x_58872_needit_needitcourier');
+              gr2.addQuery('sys_id',courierID);
+	          gr2.query();
+
+                               while (gr2.next()){
+                               var notes = gr2.getDisplayValue('u_notes');
+								   
+								   if (notes == null || notes == '')
+									   {
+										   return 'No courier notes.';
+									   }
+								   else
+									   {
+                               return notes;
+									   }
+                              }
+				if (gr2.next() == false){
+					 return 'No courier assigned.';
+				}
+				
+			
+			}
+	
+	},
+	
+	ajaxRecord2: function(){
+		
+	var gr = new GlideRecord('x_58872_needit_needit');
+	gr.addQuery('sys_id',this.getParameter('sysparm_x'));
+	gr.query();	
+		
+			while (gr.next()){
+				
+				var grAns = gr.getDisplayValue('u_what_needed');
+		
+		
+       	return grAns;
+		
+			}
+	
+	},
+	
+	
+ajaxRecord: function() {
+
+	var s_desc = '';
+	var gr = new GlideRecord('sys_user');
+	gr.addQuery('sys_id',this.getParameter('sysparm_new'));
+	
+	gr.query();
+	
+	while (gr.next()){
+		//var i = 0; 
+	   // s_desc = i.ToString()+' '+gr.getDisplayValue('user_name'); 
+		s_desc = gr.getDisplayValue('user_name'); 
+       	
+		
+	}
+	
+	return s_desc;
+		
+	
+}
+} );
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-10-11 15:50:08</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>c96e41740f71030064868d8ce1050e85</sys_id>
+        <sys_mod_count>44</sys_mod_count>
+        <sys_name>AjaxIncludes</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_script_include_c96e41740f71030064868d8ce1050e85</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-10-17 20:48:52</sys_updated_on>
+    </sys_script_include>
+</record_update>

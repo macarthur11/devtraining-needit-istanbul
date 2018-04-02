@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description>Sample page from snaug</description>
+        <direct>false</direct>
+        <endpoint>x_58872_needit_Sample page.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+    <style>
+        body {
+            background: url(http://subtlepatterns.com/patterns/scribble_light.png) ;
+        }
+
+		.intro {
+		font-size: 150%;
+		color: red;
+		}
+		
+        #wrapper {
+            width: 90%;
+            max-width: 1100px;
+            min-width: 800px;
+            margin: 50px auto;
+        }
+
+        #columns {
+            -webkit-column-count: 3;
+            -webkit-column-gap: 10px;
+            -webkit-column-fill: auto;
+            -moz-column-count: 3;
+            -moz-column-gap: 10px;
+            -moz-column-fill: auto;
+            column-count: 3;
+            column-gap: 15px;
+            column-fill: auto;
+        }
+
+        .pin {
+            display: inline-block;
+            min-width: 175px;
+            background: #FEFEFE;
+            border: 2px solid #FAFAFA;
+            box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+            margin: 0 2px 15px;
+            -webkit-column-break-inside: avoid;
+            -moz-column-break-inside: avoid;
+            column-break-inside: avoid;
+            padding: 15px;
+            padding-bottom: 5px;
+            background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
+            opacity: 1;
+            
+            -webkit-transition: all .2s ease;
+            -moz-transition: all .2s ease;
+            -o-transition: all .2s ease;
+            transition: all .2s ease;
+        }
+
+        .pin img {
+            width: 100%;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 15px;
+            margin-bottom: 5px;
+        }
+
+        .pin p {
+            font: 12px/18px Arial, sans-serif;
+            color: #333;
+            margin: 0;
+        }
+
+        .toggle-val{
+            display:none;
+		
+		
+        }
+
+        .item-link a{
+            color: #000080;
+        }
+
+        @media (min-width: 960px) {
+            #columns {
+                -webkit-column-count: 4;
+                -moz-column-count: 4;
+                column-count: 4;
+            }
+        }
+
+        @media (min-width: 1100px) {
+            #columns {
+                -webkit-column-count: 5;
+                -moz-column-count: 5;
+                column-count: 5;
+            }
+        }
+    </style>
+
+    <g:evaluate>
+        var scRec = new GlideRecord('sc_cat_item');
+        scRec.addQuery("type!=bundle^sys_class_name!=sc_cat_item_guide^type!=package^sys_class_name!=sc_cat_item_content^pictureANYTHING");
+        scRec.query();
+    </g:evaluate>
+
+    <body>
+        <div id="wrapper" >
+            <div id="columns">
+                <g:for_each_record file="${scRec}">
+
+                    <j:if test="${scRec.picture.getDisplayValue() != ''}" >
+                        <div class="pin">
+                            <img class="item-picture" src="${scRec.picture.getDisplayValue()}" />
+                            <p class="item-name">${HTML:scRec.name}</p>
+                            <p class="item-price toggle-val">${HTML:scRec.price.getDisplayValue()}</p>
+                            <p class="item-description toggle-val">${HTML:scRec.short_description}</p>
+                            <p class="item-link toggle-val"><a href="com.glideapp.servicecatalog_cat_item_view.do?sysparm_id=${scRec.sys_id}">Order</a></p>
+                        </div>
+                    </j:if>
+                </g:for_each_record>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js" />
+
+        <script>
+            jQuery.noConflict();
+            var gallery;
+            (function($){
+
+                gallery = {
+                    init : function(){
+                        this.bindEvents();
+						
+                    },
+
+                    bindEvents : function(){
+                        $("body").on("click",".pin", function(){
+                        if($(".pin").css("opacity") == "0.5")   {
+			
+						$(".pin").css("opacity", "1");
+                                                             }
+			else {
+						$(".pin").css("opacity", "0.5");
+			}
+                            
+                        });
+                    }
+			
+                }
+
+                $(document).ready(function(){
+                    gallery.init()
+                })
+
+            })(jQuery)
+        </script>
+    </body>
+
+
+</j:jelly>]]></html>
+        <name>Sample page</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-10-05 13:13:36</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>52c275720f21030064868d8ce1050e7a</sys_id>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_name>Sample page</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_ui_page_52c275720f21030064868d8ce1050e7a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-10-09 20:55:54</sys_updated_on>
+    </sys_ui_page>
+</record_update>
